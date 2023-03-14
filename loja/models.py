@@ -37,3 +37,6 @@ class Pagamento(models.Model):
 
 class Cor(models.Model):
     nome=models.CharField(max_length=120)
+
+class Cor(models.Model):
+    descricao= models.CharField(max_length=120)
