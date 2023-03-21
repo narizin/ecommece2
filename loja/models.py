@@ -38,5 +38,24 @@ class Pagamento(models.Model):
 class Cor(models.Model):
     nome=models.CharField(max_length=120)
 
-class Cor(models.Model):
+class Tamanho(models.Model):
     descricao= models.CharField(max_length=120)
+
+class Produto(models.Model):
+    cor=models.ForeignKey(Cor,on_delete=models.CASCADE)
+    fornecedor=models.ForeignKey(Fornecedor,on_delete=models.CASCADE)
+    tamanho = models.ForeignKey(Tamanho, on_delete=models.CASCADE)
+    imagem=models.ImageField(upload_to='imagem')
+    categoria=models.ForeignKey(Categoria,on_delete=models.CASCADE)
+    descriçao=models.CharField(max_length=120)
+    valor=models.DecimalField(null=True,blank=True,decimal_places=2,max_digits=11)
+
+class estoque(models.Model):
+    quantidade=models.DecimalField(null=True,blank=True,decimal_places=2,max_digits=11)
+    produto=models.ForeignKey(Produto,on_delete=models.CASCADE)
+
+class Carrinho(models.Model):
+    cliente=models.ForeignKey(Cliente,on_delete=models.CASCADE)
+    produto=models.ForeignKey(Produto,on_delete=models.CASCADE)
+    quantidade=models.DecimalField(null=True,blank=True,decimal_places=2,max_digits=11)
+    pagamento=models.ForeignKey(Pagamento,on_delete=models.CASCADE)
